@@ -119,10 +119,13 @@ class SchematicPositionsToLayoutPlugin(pcbnew.ActionPlugin):
         self.name = "Schematic positions -> PCB positions"
         self.category = "Modify PCB"
         self.description = "Layout components on PCB in same spatial relationships as components on schematic"
+        self.show_toolbar_button = True
+        self.icon_file_name = os.path.join(os.path.dirname(__file__), './spread_module.png')
 
     def Run(self):
         board = pcbnew.GetBoard()
         work_dir, in_pcb_file = os.path.split(board.GetFileName())
+        print (work_dir)
         os.chdir(work_dir)
         root_schematic_file = os.path.splitext(in_pcb_file)[0] + '.sch'
         print('work_dir = {}'.format(work_dir), file=sys.stderr)
@@ -172,4 +175,4 @@ class SchematicPositionsToLayoutPlugin(pcbnew.ActionPlugin):
         # Move the components.
         move_modules(components, board, xsize, ysize)
 
-SchematicPositionsToLayoutPlugin().register()
+# SchematicPositionsToLayoutPlugin().register()
